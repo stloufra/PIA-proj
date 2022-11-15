@@ -6,6 +6,8 @@
 #include "InputFileParser.h"
 #include "PolygonBoundary.h"
 #include "Mesh.h"
+#include "Solver.h"
+#include "ExportVTK.h"
 
 
 int main()
@@ -19,6 +21,7 @@ int main()
     double dt = 0.01;
     double dx = 0.2;
     double endTime = 10;
+    int plotEvery = 10;
 
     PolygonBoundary boundary1 = PolygonBoundary(data1);
 
@@ -26,6 +29,23 @@ int main()
 
 
     /////////////////////////////// Odsud je to vase :-)
+
+    Solver Temperature = Solver();
+    Temperature.Init(mesh1, 20.3);
+    
+    int iterationEnd = int (endTime/dt);
+    ExportVTK Exp = ExportVTK();
+
+    for(int iteration; iteration<iterationEnd; iteration++)
+    {
+        Temperature.Iter(dt, a, dx);
+        Temperature.Stream();
+
+        if(iteration%plotEvery==0)
+        {
+            Exp.Out(Temperature, iteration, plotEvery);
+        }
+    }
 
 // soradnice uzlu
     int x = 2;
@@ -59,55 +79,6 @@ int main()
 
     
 
-    // debug, zde je mozne vypsat hodnoty orientace a typ uzlu
-    /*std::ofstream zapisDoSouboru("vystup.txt");    
-    for (int j = 0; j < mesh1.nodeList.size(); j++)
-    {
-        for (int i = 0; i < mesh1.nodeList[j].size(); i++)
-        {
-            int vystup = (int)mesh1.nodeList[j][i];
-            
-            if (vystup > 1)
-            {
-                //vystup = (mesh1.boundaryNodeList[mesh1.nodeList[j][i]].param1);
-                if(mesh1.boundaryNodeList[mesh1.nodeList[j][i]].orientation == Mesh::top)
-                {
-                    vystup = 2;
-                }
-                else if(mesh1.boundaryNodeList[mesh1.nodeList[j][i]].orientation == Mesh::right)
-                {
-                    vystup = 3;
-                }
-                else if(mesh1.boundaryNodeList[mesh1.nodeList[j][i]].orientation == Mesh::bottom)
-                {
-                    vystup = 4;
-                }
-                else if(mesh1.boundaryNodeList[mesh1.nodeList[j][i]].orientation == Mesh::left)
-                {
-                    vystup = 5;
-                }
-                else if(mesh1.boundaryNodeList[mesh1.nodeList[j][i]].orientation == Mesh::topRight)
-                {
-                    vystup = 6;
-                }
-                else if(mesh1.boundaryNodeList[mesh1.nodeList[j][i]].orientation == Mesh::bottomRight)
-                {
-                    vystup = 7;
-                }
-                else if(mesh1.boundaryNodeList[mesh1.nodeList[j][i]].orientation == Mesh::bottomLeft)
-                {
-                    vystup = 8;
-                }
-                else if(mesh1.boundaryNodeList[mesh1.nodeList[j][i]].orientation == Mesh::topLeft)
-                {
-                    vystup = 9;
-                }
-            }
-
-            zapisDoSouboru << vystup << " ";
-        }
-        zapisDoSouboru << std::endl;
-    }*/
     
     return 0;
 }
