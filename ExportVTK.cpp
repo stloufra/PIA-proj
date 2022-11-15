@@ -26,7 +26,7 @@ void ExportVTK::Out(Solver temp_in, int s, int plot_every)
     out_file << "ORIGIN 0 0 0\n";
     out_file << "POINT_DATA "<<temp.mesh.nodeList[0].size()*(temp.mesh.nodeList.size())<<"\n";
 
-    out_file << "SCALARS "<<"temp "<<"double 1\n";
+    out_file << "SCALARS "<<"Temperature[°C] "<<"double 1\n";
     out_file << "LOOKUP_TABLE default\n";
     for (int j = 0; j < temp.U_n.size(); j++)
     {
