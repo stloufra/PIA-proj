@@ -18,10 +18,10 @@ int main()
     std::vector<std::vector<int>> data1 = parser1.getData();
 
     double a = 0.12;
-    double dt = 0.01;
-    double dx = 0.2;
+    double dt = 0.005;
+    double dx = 0.1;
     double endTime = 10;
-    int plotEvery = 10;
+    int plotEvery = 15;
 
     PolygonBoundary boundary1 = PolygonBoundary(data1);
 
