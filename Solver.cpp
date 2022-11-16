@@ -12,7 +12,6 @@ void Solver::Init(Mesh mesh_input, double T0)
 {
  
     mesh = mesh_input;
-    mesh.nodeList.pop_back(); // po opravě smazat
 
     for (int j = 0; j < mesh.nodeList.size(); j++)
     {
@@ -32,10 +31,9 @@ void Solver::Init(Mesh mesh_input, double T0)
                 vh.push_back(T0);
             }
 
-            else
+            else if (mesh.boundaryNodeList[mesh.nodeList[j][i]].boundaryConditionType == 1)
             {
-                vh.push_back(100);
-                //vh.push_back(mesh.boundaryNodeList[mesh.nodeList[j][i]].param1); // po opravě použít
+                vh.push_back(mesh.boundaryNodeList[mesh.nodeList[j][i]].param1);
             }
             
         }
@@ -59,7 +57,7 @@ void Solver::Iter(double timestep, double a, double h)
                 U_n1[j][i] = timestep*a/h/h* (U_n[j-1][i] + U_n[j+1][i] + U_n[j][i-1] + U_n[j][i+1] - 4*U_n[j][i]) + U_n[j][i];
             }
 
-            else
+            else if (mesh.boundaryNodeList[mesh.nodeList[j][i]].boundaryConditionType == 1)
             {
                 U_n1[j][i]=U_n[j][i]; 
             }
