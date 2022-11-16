@@ -86,6 +86,8 @@ void Mesh::create(PolygonBoundary boundary)
         nodeList.push_back(std::vector<short>());
     }
 
+    nodeList.pop_back();
+
     setBoundaryNodesOrientation();
 }
 
@@ -157,7 +159,7 @@ bool Mesh::isPointInside(PolygonBoundary boundary, Point point)
     return false;
 }
 
-bool Mesh::isPointOnBoundary(PolygonBoundary boundary, Point point, PolygonBoundary::BoundarySegment boundarySegment)
+bool Mesh::isPointOnBoundary(PolygonBoundary boundary, Point point, PolygonBoundary::BoundarySegment& boundarySegment)
 {
     double x1 = point.x;
     double y1 = point.y;
