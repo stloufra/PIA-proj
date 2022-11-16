@@ -1,5 +1,6 @@
 #ifndef MESH_H
 #define MESH_H
+#include "PolygonBoundary.h"
 
 class Mesh
 {
@@ -31,7 +32,7 @@ class Mesh
         int nodeSumY;
 
         bool isPointInside(PolygonBoundary boundary, Point point);
-        bool isPointOnBoundary(PolygonBoundary boundary, Point point, PolygonBoundary::BoundarySegment boundarySegment);
+        bool isPointOnBoundary(PolygonBoundary boundary, Point point, PolygonBoundary::BoundarySegment& boundarySegment);
         nodeOrientationType getBoundaryNodeOrientation(int pointIndexX, int pointIndexY);
         void setBoundaryNodesOrientation();
 
