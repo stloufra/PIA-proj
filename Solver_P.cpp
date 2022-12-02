@@ -144,19 +144,19 @@ void Solver::Iter(double timestep, double a, double h)
             	}
             	else if(mesh.boundaryNodeList[mesh.nodeList[j][i]].orientation == Mesh::topRight)
             	{
-               	 U_n1[j][i]=(U_n[j][i-1]+U_n[j-1][i]+2*T_inf*((alfa*h)/a))/2;
+               	 U_n1[j][i]=(U_n[j][i-1]+U_n[j-1][i]+2*((q*h)/a))/2;
             	}
             	else if(mesh.boundaryNodeList[mesh.nodeList[j][i]].orientation == Mesh::bottomRight)
             	{
-               	 U_n1[j][i]=(U_n[j][i+1]+U_n[j-1][i]+2*T_inf*((alfa*h)/a))/2;
+               	 U_n1[j][i]=(U_n[j][i+1]+U_n[j-1][i]+2*((q*h)/a))/2;
             	}
             	else if(mesh.boundaryNodeList[mesh.nodeList[j][i]].orientation == Mesh::bottomLeft)
             	{
-               	 U_n1[j][i]=(U_n[j][i+1]+U_n[j+1][i]+2*T_inf*((alfa*h)/a))/2;
+               	 U_n1[j][i]=(U_n[j][i+1]+U_n[j+1][i]+2*((q*h)/a))/2;
             	}
             	else if(mesh.boundaryNodeList[mesh.nodeList[j][i]].orientation == Mesh::topLeft)
             	{
-               	 U_n1[j][i]=(U_n[j][i-1]+U_n[j+1][i]+2*T_inf*((alfa*h)/a))/2;
+               	 U_n1[j][i]=(U_n[j][i-1]+U_n[j+1][i]+2*((q*h)/a))/2;
             	}
             }
             
