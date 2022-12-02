@@ -35,7 +35,7 @@ class Mesh
         bool isPointOnBoundary(PolygonBoundary boundary, Point point, PolygonBoundary::BoundarySegment& boundarySegment);
         nodeOrientationType getBoundaryNodeOrientation(int pointIndexX, int pointIndexY);
         void setBoundaryNodesOrientation();
-
+        void removeCornerNodes();
         
 };
 
