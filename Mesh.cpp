@@ -88,6 +88,8 @@ void Mesh::create(PolygonBoundary boundary)
 
     nodeList.pop_back();
 
+    removeCornerNodes();
+
     setBoundaryNodesOrientation();
 }
 
@@ -295,6 +297,23 @@ void Mesh::setBoundaryNodesOrientation()
             if(nodeList[j][i] > 1)
             {
                 boundaryNodeList[nodeList[j][i]].orientation = getBoundaryNodeOrientation(i, j);
+            }
+        }
+    }
+}
+
+void Mesh::removeCornerNodes()
+{
+    for (int j = 1; j < nodeSumY-1; j++)
+    {
+        for (int i = 1; i < nodeSumX-1; i++)
+        {
+            if(nodeList[j][i] != 1)
+            {
+                if (nodeList[j-1][i] != 0 && nodeList[j+1][i] != 0 && nodeList[j][i-1] != 0 && nodeList[j][i+1] != 0)
+                {
+                    nodeList[j][i] = 1;
+                }
             }
         }
     }
